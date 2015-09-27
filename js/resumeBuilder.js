@@ -14,6 +14,39 @@ var bio = {
   "skills"     : ["Ruby", "Ruby on Rails", "JavaScript", "HTML", "CSS"]
 };
 
+var experience = {
+  "jobs" : [
+    {
+      "employer" : "Turing School of Software & Design",
+      "title"    : "Director of Growth & Operations",
+      "dates"    : "2014 - Current",
+      "location" : "Denver, CO"
+    }
+  ]
+};
+
+var portfolio = {
+  "projects" : [
+    {
+      "title"       : "BandMatch",
+      "dates"       : "2013",
+      "description" : "Bandmatch is an application that allows you to find local concerts, create plans and meet new people. The site uses SongKick and Google Maps API, and was built with Ruby, Ruby on Rails, and Bootstrap.",
+      "image"       : "images/bandmatch-small_x1.jpg"
+    }
+  ]
+};
+
+var education = {
+  "schools" : [
+    {
+      "name"     : "Tec de Monterrey",
+      "degree"   : "Master in Public Management & Public Policy",
+      "dates"    : "2005 - 2006",
+      "location" : "Monterrey, Mexico"
+    }
+  ]
+};
+
 // Header
 var formattedName       = HTMLheaderName.replace("%data%", bio.name);
 var formattedRole       = HTMLheaderRole.replace("%data%", bio.role);
@@ -41,3 +74,45 @@ $.each(bio.skills, function(_, skill) {
   var formattedSkills = HTMLskills.replace("%data%", skill);
   $("#header").append(formattedSkills);
 })
+
+// Experience
+$("#workExperience").append(HTMLworkStart);
+$.each(experience.jobs, function(_, job) {
+  var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+  var formattedWorkTitle    = HTMLworkTitle.replace("%data%", job.title);
+  var formattedWorkDates    = HTMLworkDates.replace("%data%", job.dates);
+  var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
+
+  $(".work-entry").append(formattedWorkEmployer);
+  $(".work-entry").append(formattedWorkDates);
+  $(".work-entry").append(formattedWorkTitle);
+  $(".work-entry").append(formattedWorkLocation);
+});
+
+// Portfolio
+$("#projects").append(HTMLprojectStart);
+$.each(portfolio.projects, function(_, project) {
+  var formattedProjectTitle       = HTMLprojectTitle.replace("%data%", project.title);
+  var formattedProjectDates       = HTMLprojectDates.replace("%data%", project.dates);
+  var formattedProjectDescription = HTMLprojectDescription.replace("%data%", project.description);
+  var formattedProjectImage       = HTMLprojectImage.replace("%data%", project.image);
+
+  $(".project-entry").append(formattedProjectTitle);
+  $(".project-entry").append(formattedProjectDates);
+  $(".project-entry").append(formattedProjectDescription);
+  $(".project-entry").append(formattedProjectImage);
+});
+
+// Education
+$("#education").append(HTMLschoolStart);
+$.each(education.schools, function(_, school) {
+  var formattedSchoolName     = HTMLschoolName.replace("%data%", school.name);
+  var formattedSchoolDegree   = HTMLschoolDegree.replace("%data%", school.degree);
+  var formattedSchoolDates    = HTMLschoolDates.replace("%data%", school.dates);
+  var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+
+  $(".education-entry").append(formattedSchoolName);
+  $(".education-entry").append(formattedSchoolDates);
+  $(".education-entry").append(formattedSchoolDegree);
+  $(".education-entry").append(formattedSchoolLocation);
+});
