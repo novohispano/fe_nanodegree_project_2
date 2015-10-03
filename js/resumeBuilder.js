@@ -69,11 +69,13 @@ $("#header").append(formattedBioPic);
 $("#header").append(formattedWelcomeMsg);
 
 // Skills
-$("#header").append(HTMLskillsStart);
-$.each(bio.skills, function(_, skill) {
-  var formattedSkills = HTMLskills.replace("%data%", skill);
-  $("#header").append(formattedSkills);
-})
+if (bio.skills.length > 0) {
+  $("#header").append(HTMLskillsStart);
+  $.each(bio.skills, function(_, skill) {
+    var formattedSkills = HTMLskills.replace("%data%", skill);
+    $("#header").append(formattedSkills);
+  })
+}
 
 // Experience
 $("#workExperience").append(HTMLworkStart);
@@ -90,18 +92,21 @@ $.each(experience.jobs, function(_, job) {
 });
 
 // Portfolio
-$("#projects").append(HTMLprojectStart);
-$.each(portfolio.projects, function(_, project) {
-  var formattedProjectTitle       = HTMLprojectTitle.replace("%data%", project.title);
-  var formattedProjectDates       = HTMLprojectDates.replace("%data%", project.dates);
-  var formattedProjectDescription = HTMLprojectDescription.replace("%data%", project.description);
-  var formattedProjectImage       = HTMLprojectImage.replace("%data%", project.image);
+portfolio.display = function () {
+  $("#projects").append(HTMLprojectStart);
+  $.each(portfolio.projects, function(_, project) {
+    var formattedProjectTitle       = HTMLprojectTitle.replace("%data%", project.title);
+    var formattedProjectDates       = HTMLprojectDates.replace("%data%", project.dates);
+    var formattedProjectDescription = HTMLprojectDescription.replace("%data%", project.description);
+    var formattedProjectImage       = HTMLprojectImage.replace("%data%", project.image);
 
-  $(".project-entry").append(formattedProjectTitle);
-  $(".project-entry").append(formattedProjectDates);
-  $(".project-entry").append(formattedProjectDescription);
-  $(".project-entry").append(formattedProjectImage);
-});
+    $(".project-entry").append(formattedProjectTitle);
+    $(".project-entry").append(formattedProjectDates);
+    $(".project-entry").append(formattedProjectDescription);
+    $(".project-entry").append(formattedProjectImage);
+  });
+}
+portfolio.display();
 
 // Education
 $("#education").append(HTMLschoolStart);
@@ -116,3 +121,15 @@ $.each(education.schools, function(_, school) {
   $(".education-entry").append(formattedSchoolDegree);
   $(".education-entry").append(formattedSchoolLocation);
 });
+
+// Internationalize button
+$("#main").append(internationalizeButton);
+function inName() {
+  var fullName  = bio.name.split(" ");
+  var firstName = fullName[0][0].toUpperCase() + fullName[0].slice(1);
+  var lastName  = fullName[1].toUpperCase();
+
+  fullName = firstName + " " + lastName;
+
+  return fullName;
+}
